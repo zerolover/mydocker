@@ -1,12 +1,12 @@
-FROM ubuntu:18.04
+FROM ubuntu:20.04
 
 RUN apt-get update && apt-get install -y file vim git gnupg2 wget python3 tar zip unzip rsync zstd patchelf htop
 
-RUN bash -c 'echo "deb https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu bionic main" > /etc/apt/sources.list.d/ubuntu-toolchain-r-test.list' && \
-    bash -c 'echo "deb-src https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu bionic main" >> /etc/apt/sources.list.d/ubuntu-toolchain-r-test.list'
+RUN bash -c 'echo "deb https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu focal main" > /etc/apt/sources.list.d/ubuntu-toolchain-r-test.list' && \
+    bash -c 'echo "deb-src https://ppa.launchpadcontent.net/ubuntu-toolchain-r/test/ubuntu focal main" >> /etc/apt/sources.list.d/ubuntu-toolchain-r-test.list'
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C8EC952E2A0E1FBDC5090F6A2C277A0A352154E5
 RUN apt-get update && apt-get install -y build-essential gcc-13 g++-13
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 70 --slave /usr/bin/g++ g++ /usr/bin/g++-7
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /usr/bin/g++ g++ /usr/bin/g++-9
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 130 --slave /usr/bin/g++ g++ /usr/bin/g++-13
 
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6.tar.gz -O cmake.tar.gz
