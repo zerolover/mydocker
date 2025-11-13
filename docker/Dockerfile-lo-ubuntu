@@ -10,18 +10,18 @@ RUN apt-get update && apt-get install -y build-essential gcc-13 g++-13
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /usr/bin/g++ g++ /usr/bin/g++-9
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 130 --slave /usr/bin/g++ g++ /usr/bin/g++-13
 
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.6/cmake-3.31.6.tar.gz -O cmake.tar.gz
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.9/cmake-3.31.9.tar.gz -O cmake.tar.gz
 RUN mkdir cmake && tar -xzvf cmake.tar.gz --strip-components=1 -C cmake
 RUN cd cmake && ./bootstrap --parallel=8 -- -DCMAKE_USE_OPENSSL=OFF -DBUILD_TESTING=OFF && \
     make -j8 && make install && \
     cd .. && rm -rf cmake cmake.tar.gz
 
-RUN wget https://github.com/ccache/ccache/releases/download/v4.11.2/ccache-4.11.2-linux-x86_64.tar.xz -O ccache.tar.xz
+RUN wget https://github.com/ccache/ccache/releases/download/v4.12.1/ccache-4.12.1-linux-x86_64.tar.xz -O ccache.tar.xz
 RUN mkdir ccache && tar -xJf ccache.tar.xz --strip-components=1 -C ccache
 RUN cd ccache && make install && \
     cd .. && rm -rf ccache ccache.tar.xz
 
-RUN wget https://github.com/ninja-build/ninja/releases/download/v1.12.1/ninja-linux.zip -O ninja.zip
+RUN wget https://github.com/ninja-build/ninja/releases/download/v1.13.1/ninja-linux.zip -O ninja.zip
 RUN mkdir ninja && unzip ninja.zip -d ninja
 RUN cd ninja && mv ninja /usr/bin/ && \
     cd .. && rm -rf ninja ninja.zip
